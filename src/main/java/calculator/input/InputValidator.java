@@ -2,6 +2,11 @@ package calculator.input;
 
 public class InputValidator {
     public void validate(String input){
+        if (input == null || input.isEmpty()){
+            throw new IllegalArgumentException("입력값이 비어있습니다.");
+        }
+
+
         if (input.startsWith("//")){
             if (!input.contains("\\n")){
                 throw new IllegalArgumentException("커스텀 구분자 형식이 잘못되었습니다.");
