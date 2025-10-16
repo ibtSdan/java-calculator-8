@@ -1,7 +1,9 @@
 package calculator.input;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class InputValidator {
     List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
@@ -48,5 +50,17 @@ public class InputValidator {
             throw new IllegalArgumentException("입력값에 최소 1개의 숫자가 포함되어야 합니다.");
         }
 
+        String regex = delimiters.stream()
+                .map(d -> "\\"+d)
+                .collect(Collectors.joining("|"));
+
+        String[] numbers = input.split(regex);
+        for (String n : numbers){
+            if (n.isEmpty()) continue;
+            int number= Integer.parseInt(n);
+            if (number<=0){
+                throw new IllegalArgumentException("양이 아닌 정수가 입력되었습니다.");
+            }
+        }
     }
 }
