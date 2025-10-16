@@ -9,7 +9,7 @@ public class InputValidator {
     private Splitter splitter = new Splitter();
     List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
 
-    public void validate(String input){
+    public List<Integer> validate(String input){
         if (input == null || input.isEmpty()){
             throw new IllegalArgumentException("입력값이 비어있습니다.");
         }
@@ -62,5 +62,6 @@ public class InputValidator {
                 throw new IllegalArgumentException("숫자 입력은 양수만 가능합니다.");
             }
         }
+        return numbers;
     }
 }
