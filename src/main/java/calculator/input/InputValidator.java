@@ -46,11 +46,6 @@ public class InputValidator {
             }
         }
 
-        boolean hasDelimiter = cleanedInput.chars().anyMatch(c -> delimiters.contains((char) c));
-        if (!hasDelimiter){
-            throw new IllegalArgumentException("입력값에 최소 1개의 구분자가 포함되어야 합니다.");
-        }
-
         boolean hasNumber = cleanedInput.chars().anyMatch(Character::isDigit);
         if (!hasNumber){
             throw new IllegalArgumentException("입력값에 최소 1개의 숫자가 포함되어야 합니다.");
