@@ -1,11 +1,12 @@
 package calculator.input;
 
+import calculator.split.Splitter;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class InputValidator {
+    private Splitter splitter = new Splitter();
     List<Character> delimiters = new ArrayList<>(List.of(',', ':'));
 
     public void validate(String input){
@@ -55,16 +56,10 @@ public class InputValidator {
             throw new IllegalArgumentException("입력값에 최소 1개의 숫자가 포함되어야 합니다.");
         }
 
-        String regex = delimiters.stream()
-                .map(d -> "\\"+d)
-                .collect(Collectors.joining("|"));
-
-        String[] numbers = cleanedInput.split(regex);
-        for (String n : numbers){
-            if (n.isEmpty()) continue;
-            int number= Integer.parseInt(n);
-            if (number<=0){
-                throw new IllegalArgumentException("양이 아닌 정수가 입력되었습니다.");
+        List<Integer> numbers = splitter.numberSplit(cleanedInput, delimiters);
+        for (Integer n : numbers){
+            if (n<=0){
+                throw new IllegalArgumentException("숫자 입력은 양수만 가능합니다.");
             }
         }
     }
