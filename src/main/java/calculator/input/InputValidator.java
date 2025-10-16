@@ -32,6 +32,12 @@ public class InputValidator {
             }
         }
 
+        for (char c : input.toCharArray()){
+            if (!Character.isDigit(c) && !delimiters.contains(c)){
+                throw new IllegalArgumentException("선언되지 않은 구분자가 존재합니다.");
+            }
+        }
+
         boolean hasDelimiter = input.chars().anyMatch(c -> delimiters.contains((char) c));
         if (!hasDelimiter){
             throw new IllegalArgumentException("입력값에 최소 1개의 구분자가 포함되어야 합니다.");
