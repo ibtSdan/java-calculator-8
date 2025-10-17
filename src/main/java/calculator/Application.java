@@ -1,11 +1,12 @@
 package calculator;
 
 import calculator.calculation.Calculator;
+import calculator.dto.Numbers;
+import calculator.dto.Result;
+import calculator.dto.UserInput;
 import calculator.input.InputReader;
 import calculator.input.InputValidator;
 import calculator.output.OutputWriter;
-
-import java.util.List;
 
 public class Application {
     public static void main(String[] args) {
@@ -14,9 +15,9 @@ public class Application {
         Calculator calculator = new Calculator();
         OutputWriter writer = new OutputWriter();
 
-        String input = reader.readInput();
-        List<Integer> numbers = validator.validate(input);
-        Integer result = calculator.sum(numbers);
+        UserInput input = new UserInput(reader.readInput());
+        Numbers numbers = new Numbers(validator.validate(input));
+        Result result = new Result(calculator.sum(numbers));
         writer.printResult(result);
     }
 }
