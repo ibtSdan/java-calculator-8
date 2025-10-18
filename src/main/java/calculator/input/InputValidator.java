@@ -48,11 +48,9 @@ public class InputValidator {
             throw new IllegalArgumentException("입력값에 최소 1개의 숫자가 포함되어야 합니다.");
         }
 
-        List<Integer> numbers = splitter.numberSplit(cleaned, delimiters);
+        List<Integer> numbers = splitter.splitAndParse(cleaned, delimiters);
         for (Integer n : numbers){
-            if (n<=0){
-                throw new IllegalArgumentException("숫자 입력은 양수만 가능합니다.");
-            }
+            if (n<=0) throw new IllegalArgumentException("숫자 입력은 양수만 가능합니다.");
         }
         return numbers;
     }
